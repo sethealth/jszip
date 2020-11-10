@@ -17,9 +17,9 @@ __Example__
 
 ```js
 // use bluebird instead
-JSZip.external.Promise = Bluebird;
+Promise = Bluebird;
 
 // use the native Promise object:
-JSZip.external.Promise = Promise;
+Promise = Promise;
 ```
 

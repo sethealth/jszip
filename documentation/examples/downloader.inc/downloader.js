@@ -1,9 +1,4 @@
 
-var Promise = window.Promise;
-if (!Promise) {
-    Promise = JSZip.external.Promise;
-}
-
 /**
  * Fetch the content and return the associated promise.
  * @param {String} url the url of the content to fetch.

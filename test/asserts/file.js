@@ -444,7 +444,7 @@ QUnit.module("file", function () {
 
     QUnit.test("add file: file(name, polyfill Promise[string] as binary)", function (assert) {
         var str2promise = function (str) {
-            return new JSZip.external.Promise(function(resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 setTimeout(function () {
                     resolve(str);
                 }, 10);
@@ -457,7 +457,7 @@ QUnit.module("file", function () {
 
     QUnit.test("add file: file(name, polyfill Promise[string] force text)", function (assert) {
         var str2promise = function (str) {
-            return new JSZip.external.Promise(function(resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 setTimeout(function () {
                     resolve(str);
                 }, 10);
@@ -473,7 +473,7 @@ QUnit.module("file", function () {
      *
     QUnit.test("add file: file(name, polyfill Promise[string] as text)", function (assert) {
         var str2promise = function (str) {
-            return new JSZip.external.Promise(function(resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 setTimeout(function () {
                     resolve(str);
                 }, 10);
@@ -496,7 +496,7 @@ QUnit.module("file", function () {
     if (JSZip.support.blob) {
         QUnit.test("add file: file(name, polyfill Promise[Blob])", function (assert) {
             var str2promiseOfBlob = function (str) {
-                return new JSZip.external.Promise(function(resolve, reject) {
+                return new Promise(function(resolve, reject) {
                     setTimeout(function () {
                         resolve(str2blob(str));
                     }, 10);

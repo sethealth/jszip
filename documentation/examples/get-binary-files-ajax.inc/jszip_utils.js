@@ -1,5 +1,5 @@
 // 1) get a promise of the content
-var promise = new JSZip.external.Promise(function (resolve, reject) {
+var promise = new Promise(function (resolve, reject) {
     JSZipUtils.getBinaryContent('{{site.baseurl}}/test/ref/text.zip', function(err, data) {
         if (err) {
             reject(err);

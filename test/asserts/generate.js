@@ -13,7 +13,7 @@ function testGenerateFor(testCases, fn) {
 function testGenerate(assert, options) {
     var done = assert.async();
     var triggeredCallback = false;
-    new JSZip.external.Promise(function(resolve, reject) {
+    new Promise(function(resolve, reject) {
         resolve(options.prepare());
     })
     .then(function (zip) {
@@ -347,12 +347,12 @@ QUnit.test("generateAsync keep the explicit / folder", function (assert) {
 JSZipTestUtils.testZipFile("generate with promises as files", "ref/all.zip", function (assert, expected) {
     var done = assert.async();
     var zip = new JSZip();
-    zip.file("Hello.txt", new JSZip.external.Promise(function (resolve, reject) {
+    zip.file("Hello.txt", new Promise(function (resolve, reject) {
         setTimeout(function () {
             resolve("Hello World\n");
         }, 50);
     }));
-    zip.folder("images").file("smile.gif", new JSZip.external.Promise(function (resolve, reject) {
+    zip.folder("images").file("smile.gif", new Promise(function (resolve, reject) {
         setTimeout(function () {
             resolve("R0lGODdhBQAFAIACAAAAAP/eACwAAAAABQAFAAACCIwPkWerClIBADs=");
         }, 100);

@@ -117,10 +117,10 @@ module.exports = function(grunt) {
   grunt.registerTask("test-remote", ["build", "connect", "saucelabs-qunit"]);
 
   if (process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY) {
-    grunt.registerTask("test", ["jshint", "test-remote"]);
+    grunt.registerTask("test", ["test-remote"]);
   } else {
-    grunt.registerTask("test", ["jshint", "test-local"]);
+    grunt.registerTask("test", ["test-local"]);
   }
   grunt.registerTask("build", ["browserify", "uglify"]);
-  grunt.registerTask("default", ["jshint", "build"]);
+  grunt.registerTask("default", ["build"]);
 };

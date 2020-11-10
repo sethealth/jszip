@@ -30,7 +30,7 @@ JSZipUtils.getBinaryContent('path/to/content.zip', function(err, data) {
 
 // or, with promises:
 
-new JSZip.external.Promise(function (resolve, reject) {
+new Promise(function (resolve, reject) {
     JSZipUtils.getBinaryContent('path/to/content.zip', function(err, data) {
         if (err) {
             reject(err);
@@ -86,7 +86,7 @@ fs.readFile("test.zip", function(err, data) {
     });
 });
 // or
-new JSZip.external.Promise(function (resolve, reject) {
+new Promise(function (resolve, reject) {
     fs.readFile("test.zip", function(err, data) {
         if (err) {
             reject(e);
@@ -107,7 +107,7 @@ fs.readFile("picture.png", function(err, data) {
     zip.file("picture.png", data);
 });
 // or
-var contentPromise = new JSZip.external.Promise(function (resolve, reject) {
+var contentPromise = new Promise(function (resolve, reject) {
     fs.readFile("picture.png", function(err, data) {
         if (err) {
             reject(e);

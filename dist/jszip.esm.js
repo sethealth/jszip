@@ -1,47 +1,21 @@
-'use strict';
+import * as pako from '@sethealth/pako';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var pako = require('@sethealth/pako');
-
-function _interopNamespace(e) {
-    if (e && e.__esModule) return e;
-    var n = Object.create(null);
-    if (e) {
-        Object.keys(e).forEach(function (k) {
-            if (k !== 'default') {
-                var d = Object.getOwnPropertyDescriptor(e, k);
-                Object.defineProperty(n, k, d.get ? d : {
-                    enumerable: true,
-                    get: function () {
-                        return e[k];
-                    }
-                });
-            }
-        });
-    }
-    n['default'] = e;
-    return Object.freeze(n);
-}
-
-var pako__namespace = /*#__PURE__*/_interopNamespace(pako);
-
-const exports$1 = {};
-exports$1.base64 = true;
-exports$1.array = true;
-exports$1.string = true;
-exports$1.arraybuffer = typeof ArrayBuffer !== "undefined" && typeof Uint8Array !== "undefined";
-exports$1.nodebuffer = typeof Buffer !== "undefined";
+const exports = {};
+exports.base64 = true;
+exports.array = true;
+exports.string = true;
+exports.arraybuffer = typeof ArrayBuffer !== "undefined" && typeof Uint8Array !== "undefined";
+exports.nodebuffer = typeof Buffer !== "undefined";
 // contains true if JSZip can read/generate Uint8Array, false otherwise.
-exports$1.uint8array = typeof Uint8Array !== "undefined";
+exports.uint8array = typeof Uint8Array !== "undefined";
 
 if (typeof ArrayBuffer === "undefined") {
-    exports$1.blob = false;
+    exports.blob = false;
 }
 else {
     var buffer = new ArrayBuffer(0);
     try {
-        exports$1.blob = new Blob([buffer], {
+        exports.blob = new Blob([buffer], {
             type: "application/zip"
         }).size === 0;
     }
@@ -50,15 +24,15 @@ else {
             var Builder = self.BlobBuilder || self.WebKitBlobBuilder || self.MozBlobBuilder || self.MSBlobBuilder;
             var builder = new Builder();
             builder.append(buffer);
-            exports$1.blob = builder.getBlob('application/zip').size === 0;
+            exports.blob = builder.getBlob('application/zip').size === 0;
         }
         catch (e) {
-            exports$1.blob = false;
+            exports.blob = false;
         }
     }
 }
 
-exports$1.nodestream = false;
+exports.nodestream = false;
 
 // private property
 const _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -553,7 +527,7 @@ const getTypeOf = function(input) {
  * @throws {Error} an Error if the browser doesn't support the requested type.
  */
 const checkSupport = function(type) {
-    var supported = exports$1[type.toLowerCase()];
+    var supported = exports[type.toLowerCase()];
     if (!supported) {
         throw new Error(type + " is not supported by this platform");
     }
@@ -633,7 +607,7 @@ const prepareContent = function(name, inputData, isBinary, isOptimizedBinaryStri
     var promise = Promise.resolve(inputData).then(function(data) {
         
         
-        var isBlob = exports$1.blob && (data instanceof Blob || ['[object File]', '[object Blob]'].indexOf(Object.prototype.toString.call(data)) !== -1);
+        var isBlob = exports.blob && (data instanceof Blob || ['[object File]', '[object Blob]'].indexOf(Object.prototype.toString.call(data)) !== -1);
 
         if (isBlob && typeof FileReader !== "undefined") {
             return new Promise(function (resolve, reject) {
@@ -1740,7 +1714,7 @@ FlateWorker.prototype.cleanUp = function () {
  * issue #446.
  */
 FlateWorker.prototype._createPako = function () {
-    this._pako = new pako__namespace[this._pakoAction]({
+    this._pako = new pako[this._pakoAction]({
         raw: true,
         level: this._pakoOptions.level || -1 // default compression
     });
@@ -3738,7 +3712,7 @@ function JSZip() {
 }
 JSZip.prototype = out;
 JSZip.prototype.loadAsync = loadAsync;
-JSZip.support = exports$1;
+JSZip.support = exports;
 JSZip.defaults = defaults;
 
 // TODO find a better way to handle this version,
@@ -3749,4 +3723,4 @@ JSZip.loadAsync = function (content, options) {
     return new JSZip().loadAsync(content, options);
 };
 
-exports.JSZip = JSZip;
+export { JSZip };

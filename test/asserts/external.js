@@ -41,63 +41,63 @@ function createPromiseProxy(OriginalPromise) {
     return MyShinyPromise;
 }
 
-QUnit.test("JSZip.external.Promise", function (assert) {
-    assert.ok(JSZip.external.Promise, "JSZip.external.Promise is defined");
-    assert.ok(JSZip.external.Promise.resolve, "JSZip.external.Promise looks like a Promise");
-    assert.ok(JSZip.external.Promise.reject, "JSZip.external.Promise looks like a Promise");
+QUnit.test("Promise", function (assert) {
+    assert.ok(Promise, "Promise is defined");
+    assert.ok(Promise.resolve, "Promise looks like a Promise");
+    assert.ok(Promise.reject, "Promise looks like a Promise");
 });
 
 QUnit.test("load JSZip doesn't override the global Promise", function (assert) {
     if (typeof Promise !== "undefined"){
         assert.equal(Promise, JSZipTestUtils.oldPromise, "the previous Promise didn't change");
-        assert.equal(Promise, JSZip.external.Promise, "JSZip.external.Promise reused the global Promise");
+        assert.equal(Promise, Promise, "Promise reused the global Promise");
     } else {
-        assert.ok(JSZip.external.Promise, "JSZip.external.Promise is defined even if the global Promise doesn't exist");
+        assert.ok(Promise, "Promise is defined even if the global Promise doesn't exist");
     }
 });
 
-QUnit.test("external.Promise can be replaced in .async()", function (assert) {
+QUnit.test("Promise can be replaced in .async()", function (assert) {
     var done = assert.async();
-    var OriginalPromise = JSZip.external.Promise;
+    var OriginalPromise = Promise;
     var MyShinyPromise = createPromiseProxy(OriginalPromise);
 
-    JSZip.external.Promise = MyShinyPromise;
+    Promise = MyShinyPromise;
 
     var promise = JSZipTestUtils.createZipAll().file("Hello.txt").async("string").then(function (result) {
         assert.ok(MyShinyPromise.calls > 0, "at least 1 call of the new Promise");
-        JSZip.external.Promise = OriginalPromise;
+        Promise = OriginalPromise;
         done();
     })['catch'](JSZipTestUtils.assertNoError);
 
     assert.ok(promise.isACustomImplementation, "the custom implementation is used");
 });
 
-QUnit.test("external.Promise can be replaced in .generateAsync()", function (assert) {
+QUnit.test("Promise can be replaced in .generateAsync()", function (assert) {
     var done = assert.async();
-    var OriginalPromise = JSZip.external.Promise;
+    var OriginalPromise = Promise;
     var MyShinyPromise = createPromiseProxy(OriginalPromise);
 
-    JSZip.external.Promise = MyShinyPromise;
+    Promise = MyShinyPromise;
 
     var promise = JSZipTestUtils.createZipAll().generateAsync({type:"string"}).then(function (result) {
         assert.ok(MyShinyPromise.calls > 0, "at least 1 call of the new Promise");
-        JSZip.external.Promise = OriginalPromise;
+        Promise = OriginalPromise;
         done();
     })['catch'](JSZipTestUtils.assertNoError);
 
     assert.ok(promise.isACustomImplementation, "the custom implementation is used");
 });
 
-JSZipTestUtils.testZipFile("external.Promise can be replaced in .loadAsync()", "ref/all.zip", function (assert, all) {
+JSZipTestUtils.testZipFile("Promise can be replaced in .loadAsync()", "ref/all.zip", function (assert, all) {
     var done = assert.async();
-    var OriginalPromise = JSZip.external.Promise;
+    var OriginalPromise = Promise;
     var MyShinyPromise = createPromiseProxy(OriginalPromise);
 
-    JSZip.external.Promise = MyShinyPromise;
+    Promise = MyShinyPromise;
 
     var promise = JSZip.loadAsync(all).then(function (result) {
         assert.ok(MyShinyPromise.calls > 0, "at least 1 call of the new Promise");
-        JSZip.external.Promise = OriginalPromise;
+        Promise = OriginalPromise;
         done();
     })['catch'](JSZipTestUtils.assertNoError);
 
