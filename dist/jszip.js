@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var pako = require('@sethealth/pako');
+const pako = require('@sethealth/pako');
 
 function _interopNamespace(e) {
     if (e && e.__esModule) return e;
@@ -24,7 +24,7 @@ function _interopNamespace(e) {
     return Object.freeze(n);
 }
 
-var pako__namespace = /*#__PURE__*/_interopNamespace(pako);
+const pako__namespace = /*#__PURE__*/_interopNamespace(pako);
 
 const exports$1 = {};
 exports$1.base64 = true;
@@ -159,7 +159,7 @@ const decode = function(input) {
     return output;
 };
 
-var nodejsUtils = {
+const nodejsUtils = {
     /**
      * True if this is running in Nodejs, will be undefined in a browser.
      * In a browser, browserify won't include this file and the whole module
@@ -1761,14 +1761,14 @@ const uncompressWorker = function () {
     return new FlateWorker("Inflate", {});
 };
 
-var deflate = /*#__PURE__*/Object.freeze({
+const deflate = /*#__PURE__*/Object.freeze({
     __proto__: null,
     magic: magic,
     compressWorker: compressWorker,
     uncompressWorker: uncompressWorker
 });
 
-var compressions = {
+const compressions = {
     STORE: {
         magic: "\x00\x00",
         compressWorker : function (compressionOptions) {
@@ -2605,7 +2605,7 @@ StreamHelper.prototype = {
     }
 };
 
-var defaults = {
+const defaults = {
     base64: false,
     binary: false,
     dir: false,

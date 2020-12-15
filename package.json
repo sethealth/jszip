@@ -50,11 +50,11 @@
     "jshint": "~2.9.1",
     "package-json-versionify": "1.0.2",
     "qunit": "~2.9.2",
-    "rollup": "^2.33.1",
+    "rollup": "^2.35.1",
     "tmp": "0.0.28"
   },
   "dependencies": {
-    "@sethealth/pako": "^1.0.12"
+    "@sethealth/pako": "^2.0.2"
   },
   "license": "(MIT OR GPL-3.0)"
 }
